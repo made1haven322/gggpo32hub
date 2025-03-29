@@ -1,0 +1,37 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
+local Window = Library.CreateLib("GGGPOhub", "RJTheme3")
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Farm")
+
+farm = false
+
+
+Section:NewToggle("AutoFarm", "ToggleInfo", function(state)
+    if state then
+    farm = true
+      while farm == true do
+      local player = game.Players.LocalPlayer.Character.HumanoidRootPart
+      local part = game.workspace.BoatStages.NormalStages.CaveStage1.StonePart.Position
+      local part2 = game.workspace.BoatStages.NormalStages.CaveStage2.StonePart.Position
+      local part3 = game.workspace.BoatStages.NormalStages.CaveStage3.StonePart.Position
+      local part4 = game.workspace.BoatStages.NormalStages.CaveStage4.StonePart.Position
+      wait(0.5)
+      player.CFrame = CFrame.new(part)
+      wait(2)
+      player.CFrame = CFrame.new(part2)
+      wait(1.5)
+      player.CFrame = CFrame.new(part3)
+      wait(1)
+      player.CFrame = CFrame.new(part4)
+      wait(10)
+      end
+        
+    else
+       farm = false
+    end
+end)
+
+local Section = Tab:NewSection("IsolationHack")
+Section:NewButton("WhiteIsolationDelete", "Delete white isolation", function()
+    game.workspace.WhiteZone.Lock.Part:Destroy()
+end)
