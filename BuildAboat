@@ -30,32 +30,3 @@ Section:NewToggle("AutoFarm", "ToggleInfo", function(state)
        farm = false
     end
 end)
-
-local Section = Tab:NewSection("IsolationHack")
-Section:NewButton("WhiteIsolationDelete", "Delete white isolation", function()
-    game.workspace.WhiteZone.Lock.Part:Destroy()
-end)
-
-Section:NewButton("RedIsolationDelete", "Delete red isolation", function()
-    game.workspace.ReallyredZone.Lock.Part:Destroy()
-end)
-
-Section:NewButton("GreenIsolationDelete", "Delete green isolation", function()
-    game.workspace.CamoZone.Lock.Part:Destroy()
-end)
-
-Section:NewButton("YellowIsolationDelete", "Delete yellow isolation", function()
-    game.workspace.NewYellerZone.Lock.Part:Destroy()
-end)
-
-Section:NewButton("BlueIsolationDelete", "Delete blue isolation", function()
-    game.workspace.ReallyblueZone.Lock.Part:Destroy()
-end)
-
-Section:NewButton("MagnetaIsolationDelete", "Delete magneta isolation", function()
-    game.workspace.MagentaZone.Lock.Part:Destroy()
-end)
-
-Section:NewButton("BlackIsolationDelete", "Delete black isolation", function()
-    game.workspace.BlackZone.Lock.Part:Destroy()
-end)
