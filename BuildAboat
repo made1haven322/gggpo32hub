@@ -30,3 +30,13 @@ Section:NewToggle("AutoFarm", "ToggleInfo", function(state)
        farm = false
     end
 end)
+
+local Section = Tab:NewSection("player")
+
+Section:NewSlider("speed", "SliderInfo", 500, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+Section:NewSlider("Jump", "SliderInfo", 500, 0, function(s) -- 500 (Макс. значение) | 0 (Мин. значение)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
