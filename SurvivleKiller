@@ -1,10 +1,12 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Robojini/Tuturial_UI_Library/main/UI_Template_1"))()
 local Window = Library.CreateLib("Name", "RJTheme3")
-local Tab = Window:NewTab("TabName")
-local Section = Tab:NewSection("Section Nam")
+local Tab = Window:NewTab("Visuals")
+local Section = Tab:NewSection("ESP")
 
-Section:NewButton("ButtonText", "ButtonInfo", function()
-    while wait(0.5) do
+
+
+Section:NewButton("ESPkiller", "ButtonInfo", function()
+	while wait(0.5) do
         for i, childrik in ipairs(workspace:GetDescendants()) do
             if childrik:FindFirstChild("Humanoid") then
                 if not childrik:FindFirstChild("EspBoxKiller") then
@@ -15,7 +17,7 @@ Section:NewButton("ButtonText", "ButtonInfo", function()
     						esp.ZIndex = 0
     						esp.Size = Vector3.new(4, 5, 1)
     						esp.Transparency = 0.65
-    						esp.Color3 = Color3.fromRGB(255,48,48)
+    						esp.Color3 = Color3.fromRGB(196, 40, 28)
     						esp.AlwaysOnTop = true
     						esp.Name = "EspBoxKiller"
     					end
@@ -23,5 +25,56 @@ Section:NewButton("ButtonText", "ButtonInfo", function()
                 end
             end
         end
-    end
+	end
+end)
+
+Section:NewButton("ESPplayer", "ButtonInfo", function()	
+	while wait(0.5) do
+		for i, childrik in ipairs(workspace:GetDescendants()) do
+			if childrik:FindFirstChild("Humanoid") then
+				if not childrik:FindFirstChild("EspBox") then
+					if childrik ~= game.Players.LocalPlayer.Character then
+						local esp = Instance.new("BoxHandleAdornment",childrik)
+						esp.Adornee = childrik
+						esp.ZIndex = 1
+						esp.Size = Vector3.new(3, 3, 1)
+						esp.Transparency = 0.85
+						esp.Color3 = Color3.fromRGB(194, 218, 184)
+						esp.AlwaysOnTop = true
+						esp.Name = "EspBox"
+					end
+				end
+			end
+		end
+	end
+end)
+
+
+
+
+
+
+Section:NewButton("ESPitems", "ButtonInfo", function()
+		while wait(0.5) do
+			for i, predme in ipairs(Workspace:GetDescendants()) do
+				if predme:FindFirstChild("LootProxBlock") then
+					if not predme:FindFirstChild("espBoxPred") then
+						local PESP = Instance.new("BoxHandleAdornment",predme)
+						PESP.Size = Vector3.new(1, 1, 1)
+						PESP.Transparency = 0.65
+						PESP.Adornee = predme
+						PESP.ZIndex = 0
+						PESP.AlwaysOnTop = true
+						PESP.Color3 = Color3.fromRGB(245, 205, 48)
+						PESP.Name = "espBoxPred"
+					end
+				end
+			end
+		end	
+end)
+
+local Tab = Window:NewTab("player")
+local Section = Tab:NewSection("Speed")
+Section:NewSlider("SpeedHack", "SliderInfo", 200, 0, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
