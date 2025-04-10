@@ -2,31 +2,35 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Roboj
 local Window = Library.CreateLib("Name", "RJTheme3")
 local Tab = Window:NewTab("Visuals")
 local Section = Tab:NewSection("ESP")
+local espkiller = false
 
 
 
-Section:NewButton("ESPkiller", "ButtonInfo", function()
-	while wait(0.5) do
-        for i, childrik in ipairs(workspace:GetDescendants()) do
-            if childrik:FindFirstChild("Humanoid") then
-                if not childrik:FindFirstChild("EspBoxKiller") then
-                    if childrik ~= game.Players.LocalPlayer.Character then
-    					if childrik:FindFirstChild("Knife") then
-    						local esp = Instance.new("BoxHandleAdornment",childrik)
-    						esp.Adornee = childrik
-    						esp.ZIndex = 0
-    						esp.Size = Vector3.new(4, 5, 1)
-    						esp.Transparency = 0.65
-    						esp.Color3 = Color3.fromRGB(196, 40, 28)
-    						esp.AlwaysOnTop = true
-    						esp.Name = "EspBoxKiller"
-    					end
-                    end
-                end
-            end
-        end
+Section:NewToggle("KillerESP", "ToggleInfo", function(state)
+    if state then
+		espkiller = true
+		while espkiller == true do
+		wait(0.5)
+			for _, player in pairs(workspace:GetDescendants()) do
+				if player:FindFirstChild("Humanoid") then
+					if player:FindFirstChild("Knife") then
+						local esp = player:FindFirstChild("ESP")
+						if not esp then
+							esp = Instance.new("Highlight", player)
+							esp.Name = "ESP"
+							esp.Parent = player
+							esp.ZIndex = 1
+						end
+					end
+				end
+			end
+		end
+    elseif esp then
+	espkiller = false
+	esp:Destroy()
 	end
 end)
+
 
 Section:NewButton("ESPplayer", "ButtonInfo", function()	
 	while wait(0.5) do
@@ -78,3 +82,10 @@ local Section = Tab:NewSection("Speed")
 Section:NewSlider("SpeedHack", "SliderInfo", 200, 0, function(s)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
+
+Section:NewButton("TPtoSafe", "ButtonInfo", function()
+	local partwe = game.workspace._Lobby.Spawns.SpawnLocation.Position
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(partwe)
+end)
+
+
