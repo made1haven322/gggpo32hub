@@ -2,79 +2,92 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Roboj
 local Window = Library.CreateLib("Name", "RJTheme3")
 local Tab = Window:NewTab("Visuals")
 local Section = Tab:NewSection("ESP")
-local espkiller = false
+local espPlayers = false
+local esppredme = false
 
-
-
-Section:NewToggle("KillerESP", "ToggleInfo", function(state)
+Section:NewToggle("ESPkiller", "ToggleInfo", function(state)
     if state then
-		espkiller = true
-		while espkiller == true do
-		wait(0.5)
-			for _, player in pairs(workspace:GetDescendants()) do
-				if player:FindFirstChild("Humanoid") then
-					if player:FindFirstChild("Knife") then
-						local esp = player:FindFirstChild("ESP")
-						if not esp then
-							esp = Instance.new("Highlight", player)
-							esp.Name = "ESP"
-							esp.Parent = player
-							esp.ZIndex = 1
+        espkiller = true
+        spawn(function()
+            for _, player in ipairs(workspace:GetDescendants()) do
+                if player:FindFirstChild("Humanoid") and player:FindFirstChild("Knife") then
+                    if not player:FindFirstChild("ESP") then
+						local esp = Instance.new("Highlight")
+                        esp.Name = "ESP"
+						esp.FillColor = Color3.fromRGB(255, 0, 0)
+                        esp.Parent = player
+						esp.OutlineTransparency = 0
+						esp.OutlineColor = Color3.fromRGB(255, 255, 255)
+                    end
+                end
+            end
+        end)
+    else
+        espkiller = false
+        for _, player in pairs(workspace:GetDescendants()) do
+            if player:IsA("Model") and player:FindFirstChild("ESP") then
+                player.ESP:Destroy()
+            end
+        end
+    end
+end)
+
+Section:NewToggle("ESPplayer", "ToggleInfo", function(state)
+    if state then
+        espPlayers = true
+        spawn(function()
+            for _, player in ipairs(workspace:GetDescendants()) do
+                if player:FindFirstChild("Humanoid") then
+                    if not player:FindFirstChild("ESPp") then
+						if not player:FindFirstChild("Knife") then
+							local esp = Instance.new("Highlight")
+                     		esp.Name = "ESPp"
+							esp.FillColor = Color3.fromRGB(40, 127, 71)
+                        	esp.Parent = player
+							esp.OutlineTransparency = 0
+							esp.OutlineColor = Color3.fromRGB(255, 255, 255)
 						end
 					end
-				end
-			end
-		end
-    elseif esp then
-	espkiller = false
-	esp:Destroy()
-	end
+                end
+            end
+        end)
+    else
+        espPlayers = false
+        for _, player in pairs(workspace:GetDescendants()) do
+            if player:IsA("Model") and player:FindFirstChild("ESPp") then
+                player.ESPp:Destroy()
+            end
+        end
+    end
 end)
 
-
-Section:NewButton("ESPplayer", "ButtonInfo", function()	
-	while wait(0.5) do
-		for i, childrik in ipairs(workspace:GetDescendants()) do
-			if childrik:FindFirstChild("Humanoid") then
-				if not childrik:FindFirstChild("EspBox") then
-					if childrik ~= game.Players.LocalPlayer.Character then
-						local esp = Instance.new("BoxHandleAdornment",childrik)
-						esp.Adornee = childrik
-						esp.ZIndex = 1
-						esp.Size = Vector3.new(3, 3, 1)
-						esp.Transparency = 0.85
-						esp.Color3 = Color3.fromRGB(194, 218, 184)
+Section:NewToggle("ESPitems", "ToggleInfo", function(state)
+    if state then
+        esppredme = true
+        spawn(function()
+            for _, predme in ipairs(workspace:GetDescendants()) do
+                if predme:FindFirstChild("LootProxBlock") then
+                    if not predme:FindFirstChild("ESPpr") then
+						local esp = Instance.new("BoxHandleAdornment", predme)
+                     	esp.Name = "ESPpr"
+						esp.Color3 = Color3.fromRGB(245, 205, 48)
+                        esp.Adornee = predme
+						esp.Transparency = 0.75
+						esp.Size = Vector3.new(1,1,1)
 						esp.AlwaysOnTop = true
-						esp.Name = "EspBox"
+						esp.ZIndex = 0
 					end
-				end
-			end
-		end
-	end
-end)
-
-
-
-
-
-
-Section:NewButton("ESPitems", "ButtonInfo", function()
-		while wait(0.5) do
-			for i, predme in ipairs(Workspace:GetDescendants()) do
-				if predme:FindFirstChild("LootProxBlock") then
-					if not predme:FindFirstChild("espBoxPred") then
-						local PESP = Instance.new("BoxHandleAdornment",predme)
-						PESP.Size = Vector3.new(1, 1, 1)
-						PESP.Transparency = 0.65
-						PESP.Adornee = predme
-						PESP.ZIndex = 0
-						PESP.AlwaysOnTop = true
-						PESP.Color3 = Color3.fromRGB(245, 205, 48)
-						PESP.Name = "espBoxPred"
-					end
-				end
-			end
-		end	
+                end
+            end
+        end)
+    else
+        esppredme = false
+        for _, predme in pairs(workspace:GetDescendants()) do
+            if predme:IsA("Model") and predme:FindFirstChild("ESPpr") then
+                predme.ESPp:Destroy()
+            end
+        end
+    end
 end)
 
 local Tab = Window:NewTab("player")
@@ -82,10 +95,3 @@ local Section = Tab:NewSection("Speed")
 Section:NewSlider("SpeedHack", "SliderInfo", 200, 0, function(s)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
 end)
-
-Section:NewButton("TPtoSafe", "ButtonInfo", function()
-	local partwe = game.workspace._Lobby.Spawns.SpawnLocation.Position
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(partwe)
-end)
-
-
