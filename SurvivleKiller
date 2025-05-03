@@ -6,31 +6,33 @@ local espPlayers = false
 local esppredme = false
 
 Section:NewToggle("ESPkiller", "ToggleInfo", function(state)
-    if state then
-        espkiller = true
-        spawn(function()
-            for _, player in ipairs(workspace:GetDescendants()) do
-                if player:FindFirstChild("Humanoid") and player:FindFirstChild("Knife") then
-                    if not player:FindFirstChild("ESP") then
-						local esp = Instance.new("Highlight")
-                        esp.Name = "ESP"
-						esp.FillColor = Color3.fromRGB(255, 0, 0)
-                        esp.Parent = player
-						esp.OutlineTransparency = 0
-						esp.OutlineColor = Color3.fromRGB(255, 255, 255)
-                    end
-                end
-            end
-        end)
-    else
-        espkiller = false
-        for _, player in pairs(workspace:GetDescendants()) do
-            if player:IsA("Model") and player:FindFirstChild("ESP") then
-                player.ESP:Destroy()
-            end
-        end
-    end
-end)
+	if state then
+		while state true
+		        espkiller = true
+		        spawn(function()
+		            for _, player in ipairs(workspace:GetDescendants()) do
+		                if player:FindFirstChild("Humanoid") and player:FindFirstChild("Knife") then
+		                    if not player:FindFirstChild("ESP") then
+								local esp = Instance.new("Highlight")
+		                        esp.Name = "ESP"
+								esp.FillColor = Color3.fromRGB(255, 0, 0)
+		                        esp.Parent = player
+								esp.OutlineTransparency = 0
+								esp.OutlineColor = Color3.fromRGB(255, 255, 255)
+		                    end
+		                end
+		            end
+		        end)
+		    else
+		        espkiller = false
+		        for _, player in pairs(workspace:GetDescendants()) do
+		            if player:IsA("Model") and player:FindFirstChild("ESP") then
+		                player.ESP:Destroy()
+		            end
+		        end
+		    end
+		end
+	end)
 
 Section:NewToggle("ESPplayer", "ToggleInfo", function(state)
     if state then
